@@ -221,20 +221,15 @@ Why the assertions differ: Anthropic exposes explicit cache breakpoints and movi
 diagnostics:
   cacheTrace:
     enabled: true
-    filePath: "~/.openclaw/logs/cache-trace.jsonl" # optional
-    includeMessages: false # default true
-    includePrompt: false # default true
-    includeSystem: false # default true
 ```
+
+The `filePath` and content filters (`includeMessages`, `includePrompt`, `includeSystem`) were removed in a past release. Use the environment variables below instead.
 
 Defaults:
 
-| Key               | Default                                      |
-| ----------------- | -------------------------------------------- |
-| `filePath`        | `$OPENCLAW_STATE_DIR/logs/cache-trace.jsonl` |
-| `includeMessages` | `true`                                       |
-| `includePrompt`   | `true`                                       |
-| `includeSystem`   | `true`                                       |
+| Key       | Default                    |
+| --------- | -------------------------- |
+| `enabled` | `false`                    |
 
 ### Env toggles (one-off debugging)
 
