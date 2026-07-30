@@ -223,13 +223,13 @@ diagnostics:
     enabled: true
 ```
 
-The `filePath` and content filters (`includeMessages`, `includePrompt`, `includeSystem`) were removed in a past release.
+These fields (`filePath`, `includeMessages`, `includePrompt`, `includeSystem`) are retired. The config schema accepts only `enabled`; `openclaw doctor --fix` strips the rest.
 
 Defaults:
 
-| Key       | Default                    |
-| --------- | -------------------------- |
-| `enabled` | `false`                    |
+| Key       | Default |
+| --------- | ------- |
+| `enabled` | `false` |
 
 ### What to inspect
 
