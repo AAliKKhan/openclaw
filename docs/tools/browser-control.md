@@ -14,7 +14,7 @@ CLI, and scripting patterns (snapshots, refs, waits, debug flows).
 ## Control API (optional)
 
 For local integrations only, the Gateway exposes a small loopback HTTP API.
-This standalone server is opt-in — set the environment variable
+This standalone server is opt-in ??? set the environment variable
 `OPENCLAW_EAGER_BROWSER_CONTROL_SERVER=1` in the gateway service environment
 and restart the gateway before the HTTP endpoints become available. Without
 this variable the browser control runtime still works through the CLI and
@@ -287,7 +287,7 @@ Notes:
   need an answer from the current page but do not need interaction refs. It
   sanitizes readable page content, caps it at 80,000 characters, runs one
   model call, and returns only the wrapped answer. The overall timeout defaults
-  to 60 seconds and is clamped to 5–120 seconds. If extraction fails, fall back
+  to 60 seconds and is clamped to 5???120 seconds. If extraction fails, fall back
   to `snapshot`; existing-session profiles do not support extraction.
 - The agent-facing `browser` tool exposes `action=download` (required `ref` and
   `path`) and `action=waitfordownload` (optional `path`). Both return the saved
@@ -366,8 +366,8 @@ OpenClaw supports two "snapshot" styles:
 Ref behavior:
 
 - Refs are **not stable across navigations**; if something fails, re-run `snapshot` and use a fresh ref.
-- A batch stops after a committed main-frame navigation—including a same-URL
-  reload—or after the page closes. Its `aborted` summary reports the action
+- A batch stops after a committed main-frame navigation???including a same-URL
+  reload???or after the page closes. Its `aborted` summary reports the action
   number and skipped count; take a fresh snapshot before issuing dependent
   actions, or use separate act calls when navigation is expected.
 - `/act` returns the current raw `targetId` after action-triggered replacement
@@ -384,10 +384,10 @@ Ref behavior:
 call (the same `kind="batch"` runtime reached through the agent tool), so CLI
 users and scripts can combine actions like `wait`, `click`, `type`, and
 `evaluate` into a single replayable plan without per-action round trips. Each
-entry in `actions[]` is a `BrowserActRequest` — the closed union the `/act`
+entry in `actions[]` is a `BrowserActRequest` ??? the closed union the `/act`
 route accepts (`click`, `clickCoords`, `type`, `press`, `hover`,
 `scrollIntoView`, `drag`, `select`, `fill`, `resize`, `wait`, `evaluate`,
-`close`, `batch`) — not arbitrary `openclaw browser` subcommands. `batch` is
+`close`, `batch`) ??? not arbitrary `openclaw browser` subcommands. `batch` is
 not supported on `profile="user"` and other existing-session (chrome-mcp)
 profiles; send actions individually there.
 
@@ -397,8 +397,8 @@ profiles; send actions individually there.
   default is to stop on first error. `--target-id` scopes the whole batch to
   one tab.
 - Ref lifecycle: refs come from a `snapshot` run before the batch (snapshot is
-  not a nested action). A nested action that changes page state — such as a
-  `click` that triggers navigation, or an `evaluate` that mutates the DOM — can
+  not a nested action). A nested action that changes page state ??? such as a
+  `click` that triggers navigation, or an `evaluate` that mutates the DOM ??? can
   invalidate earlier refs for the rest of the batch. Put state-changing actions
   first, or split into a follow-up batch after re-snapshotting. Navigation and
   re-snapshotting happen outside the batch (`openclaw browser navigate` /
