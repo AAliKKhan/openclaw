@@ -223,7 +223,7 @@ diagnostics:
     enabled: true
 ```
 
-These fields (`filePath`, `includeMessages`, `includePrompt`, `includeSystem`) are retired. The config schema accepts only `enabled`; `openclaw doctor --fix` strips the rest.
+These fields (`filePath`, `includeMessages`, `includePrompt`, `includeSystem`) are retired from the JSON config schema, which accepts only `enabled`; `openclaw doctor --fix` strips the rest.
 
 Defaults:
 
@@ -231,9 +231,21 @@ Defaults:
 | --------- | ------- |
 | `enabled` | `false` |
 
+### Env toggles (environment-only one-off debugging)
+
+The environment controls remain active runtime overrides; they are not part of the JSON config schema.
+
+| Variable                             | Effect                               |
+| ------------------------------------ | ------------------------------------ |
+| `OPENCLAW_CACHE_TRACE=1`             | Enables cache tracing                |
+| `OPENCLAW_CACHE_TRACE_FILE=path`     | Overrides output path                |
+| `OPENCLAW_CACHE_TRACE_MESSAGES=0\|1` | Toggles full message payload capture |
+| `OPENCLAW_CACHE_TRACE_PROMPT=0\|1`   | Toggles prompt text capture          |
+| `OPENCLAW_CACHE_TRACE_SYSTEM=0\|1`   | Toggles system prompt capture        |
+
 ### What to inspect
 
-- Cache trace events track staged snapshots like `session:loaded`, `prompt:before`, `stream:context`, and `session:after`.
+- Cache trace events are JSONL with staged snapshots like `session:loaded`, `prompt:before`, `stream:context`, and `session:after`, written by default to `<state-dir>/logs/cache-trace.jsonl`.
 - Per-turn cache token impact is visible in normal usage surfaces: `cacheRead` and `cacheWrite` show up in `/usage tokens`, `/status`, session usage summaries, and custom `messages.usageTemplate` layouts.
 - For Anthropic, expect both `cacheRead` and `cacheWrite` when caching is active.
 - For OpenAI, expect `cacheRead` on cache hits; `cacheWrite` is populated only on Responses API payloads that include it (see [OpenAI](#openai-direct-api) above).
